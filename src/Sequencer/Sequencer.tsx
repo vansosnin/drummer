@@ -12,9 +12,7 @@ import { defaultTheme } from "../style/themes";
 import { useSequencerChannels } from "../hooks/useSequencerChannels";
 import { usePlayNotes } from "../hooks/usePlayNotes";
 
-interface ISequencerProps {}
-
-export const Sequencer = (props: ISequencerProps) => {
+export const Sequencer = () => {
   const {
     activeNoteIndex,
     notesCountInBar,
