@@ -5,6 +5,7 @@ const OSCILLATOR_NOTE_LENGTH = 0.1;
 class AudioService {
   private readonly audioContext: AudioContext;
   private readonly gainNode: GainNode;
+  private readonly hiHatAudioElement: HTMLAudioElement;
 
   constructor() {
     this.audioContext = new AudioContext();
@@ -13,6 +14,10 @@ class AudioService {
     const OSCILLATORS_COUNT = 2;
     this.gainNode.connect(this.audioContext.destination);
     this.gainNode.gain.value = 1 / (OSCILLATORS_COUNT * 2);
+
+    this.hiHatAudioElement = new Audio(
+      process.env.PUBLIC_URL + "/audio/KHats-Clsd-02.mp3"
+    );
   }
 
   public playSound(instrument: SequencerChannelInstrument): void {
@@ -25,17 +30,16 @@ class AudioService {
     instruments[instrument]();
   }
 
-  private playBeep = () => {
+  private playBeep = (): void => {
     this.playOscillatorSound(440);
   };
 
-  private playBoop = () => {
+  private playBoop = (): void => {
     this.playOscillatorSound(220);
   };
 
   private playHiHat = (): Promise<void> => {
-    const audio = new Audio("./audio/KHats-Clsd-02.wav");
-    return audio.play();
+    return this.hiHatAudioElement.play();
   };
 
   private playOscillatorSound(frequency: number): void {
@@ -51,7 +55,7 @@ class AudioService {
     oscillator.frequency.value = frequency;
 
     return oscillator;
-  };
+  }
 }
 
 export const audioService = new AudioService();
