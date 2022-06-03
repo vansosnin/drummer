@@ -10,6 +10,7 @@ import {
 } from "../SequencerControls/SequencerControls";
 import { defaultTheme } from "../style/themes";
 import { useSequencerChannels } from "../hooks/useSequencerChannels";
+import { usePlayNotes } from "../hooks/usePlayNotes";
 
 interface ISequencerProps {}
 
@@ -31,6 +32,8 @@ export const Sequencer = (props: ISequencerProps) => {
 
   const { instruments, notesByInstrument, changeNote } =
     useSequencerChannels(totalNotesCount);
+
+  usePlayNotes(instruments, notesByInstrument, activeNoteIndex);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {

@@ -1,6 +1,6 @@
 export enum SequencerChannelInstrument {
   Beep = "Beep",
-  Bop = "Bop",
+  Boop = "Boop",
   HiHat = "HiHat",
 }
 
