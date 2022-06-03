@@ -7,7 +7,13 @@ interface ISequencerNoteProps {
   note: SequencerNoteEnum;
   isActive: boolean;
   hasAccent: boolean;
-  onChange: (value: SequencerNoteEnum) => void;
+  onChange: (
+    instrumentIndex: number,
+    noteIndex: number
+  ) => (value: SequencerNoteEnum) => void;
+
+  instrumentIndex: number;
+  noteIndex: number;
 }
 
 export const SequencerNote = ({
@@ -15,9 +21,14 @@ export const SequencerNote = ({
   isActive,
   hasAccent,
   onChange,
+  instrumentIndex,
+  noteIndex,
 }: ISequencerNoteProps) => {
   const onClick = () => {
     onChange(
+      instrumentIndex,
+      noteIndex
+    )(
       note === SequencerNoteEnum.On
         ? SequencerNoteEnum.Off
         : SequencerNoteEnum.On

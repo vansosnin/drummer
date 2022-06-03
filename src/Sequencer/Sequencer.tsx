@@ -1,14 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import {
-  Rhythm,
-  SequencerChannelInstrument,
-  SequencerNote,
-  TimeSignature,
-} from "./types";
+import React, { useCallback, useEffect } from "react";
 import { SequencerNote as SequencerNoteComponent } from "./SequencerNote/SequencerNote";
 import { ThemeProvider } from "@mui/material/styles";
-import { notesInBar } from "../utils/notesInBar";
-import { timeSignatureInfo } from "../utils/timeSignatureInfo";
 import { isFirstNoteInBar } from "../utils/isFirstNoteInBar";
 import styles from "./Sequencer.module.css";
 import { useMetronome } from "../hooks/useMetronome";
@@ -17,6 +9,7 @@ import {
   SequencerControls,
 } from "../SequencerControls/SequencerControls";
 import { defaultTheme } from "../style/themes";
+import { useSequencerChannels } from "../hooks/useSequencerChannels";
 
 interface ISequencerProps {}
 
@@ -36,13 +29,8 @@ export const Sequencer = (props: ISequencerProps) => {
     changeTimeSignature,
   } = useMetronome();
 
-  const instruments = Object.values(SequencerChannelInstrument);
-  const defaultNotes = new Array(totalNotesCount).fill(SequencerNote.Off);
-
-  // todo: custom hook?
-  const [notesByInstrument, setNotesByInstrument] = useState<SequencerNote[][]>(
-    instruments.map(() => defaultNotes)
-  );
+  const { instruments, notesByInstrument, changeNote } =
+    useSequencerChannels(totalNotesCount);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -70,21 +58,6 @@ export const Sequencer = (props: ISequencerProps) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
-
-  // todo: useCallback?
-  const handleChangeNote =
-    (instrumentIndex: number, noteIndex: number) => (value: SequencerNote) => {
-      setNotesByInstrument(
-        notesByInstrument.map((notes, currentInstrumentIndex) =>
-          notes.map((note, currentNoteIndex) =>
-            instrumentIndex === currentInstrumentIndex &&
-            noteIndex === currentNoteIndex
-              ? value
-              : note
-          )
-        )
-      );
-    };
 
   if (notesCountInBar === null) {
     return (
@@ -132,7 +105,9 @@ export const Sequencer = (props: ISequencerProps) => {
                   note={note}
                   isActive={isPlaying && noteIndex === activeNoteIndex}
                   hasAccent={isFirstNoteInBar(noteIndex, notesCountInBar)}
-                  onChange={handleChangeNote(instrumentIndex, noteIndex)}
+                  onChange={changeNote}
+                  instrumentIndex={instrumentIndex}
+                  noteIndex={noteIndex}
                 />
               ))}
             </div>
