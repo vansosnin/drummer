@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.sequencer {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.channel {
+  display: flex;
+  align-items: center;
+}
+
+.instrument {
+  min-width: 100px;
+}
+
+.barNumber {
+  width: var(--note-width);
+  margin: var(--note-margin);
+  text-align: center;
+  font-size: var(--font-size-small);
+}
