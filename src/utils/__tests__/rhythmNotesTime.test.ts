@@ -1,4 +1,4 @@
-import { TNotesTime, rhythmNotesTime } from "../rhythmNotesTime";
+import { TNotesTime, getRhythmNotesTime } from "../getRhythmNotesTime";
 import { Rhythm } from "../../Sequencer/types";
 
 it("rhythmNotesTime", () => {
@@ -10,6 +10,6 @@ it("rhythmNotesTime", () => {
     // [Rhythm.Sixteen6]: [16, true],
   };
   Object.entries(cases).forEach(([rhythm, notesTime]) => {
-    expect(rhythmNotesTime(rhythm as Rhythm)).toEqual(notesTime);
+    expect(getRhythmNotesTime(rhythm as Rhythm)).toEqual(notesTime);
   });
 });
