@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Rhythm, TimeSignature } from "../Sequencer/types";
-import { notesInBar } from "../utils/notesInBar";
-import {timeSignatureInfo} from "../utils/timeSignatureInfo";
+import { getNotesCountInBar } from "../utils/getNotesCountInBar";
+import { getTimeSignatureInfo } from "../utils/getTimeSignatureInfo";
 
 const metronomeWorker = new Worker(
   new URL("../workers/metronome.js", import.meta.url)
@@ -15,8 +15,8 @@ export const useMetronome = () => {
   const [rhythm, setRhythm] = useState(Rhythm.Four);
   const [timeSignature, setTimeSignature] = useState(TimeSignature.FourFour);
 
-  const notesCountInBar = notesInBar(timeSignature, rhythm);
-  const [barsCount] = timeSignatureInfo(timeSignature);
+  const notesCountInBar = getNotesCountInBar(timeSignature, rhythm);
+  const [barsCount] = getTimeSignatureInfo(timeSignature);
   const totalNotesCount = (notesCountInBar ?? 0) * barsCount;
 
   const start = () => {
