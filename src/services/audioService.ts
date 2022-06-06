@@ -18,13 +18,13 @@ class AudioService {
     this.gainNode.gain.value = 1 / (OSCILLATORS_COUNT * 2);
 
     this.hiHatAudioElement = new Audio(
-      process.env.PUBLIC_URL + "/audio/KHats-Clsd-02.mp3"
+      process.env.PUBLIC_URL + "/audio/hihat.mp3"
     );
     this.snareAudioElement = new Audio(
-      process.env.PUBLIC_URL + "/audio/Acoustic Snare-04.mp3"
+      process.env.PUBLIC_URL + "/audio/snare.mp3"
     );
     this.kickAudioElement = new Audio(
-      process.env.PUBLIC_URL + "/audio/CYCdh_AcouKick-01.mp3"
+      process.env.PUBLIC_URL + "/audio/kick.mp3"
     );
   }
 
