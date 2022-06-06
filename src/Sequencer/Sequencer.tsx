@@ -60,15 +60,6 @@ export const Sequencer = () => {
     };
   }, [handleKeyDown]);
 
-  if (notesCountInBar === null) {
-    return (
-      <div className={styles.error}>
-        Cannot build sequencer. Try select different rhythm or time signature
-        settings
-      </div>
-    );
-  }
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className={styles.container}>
@@ -87,32 +78,41 @@ export const Sequencer = () => {
               onChangeTimeSignature={changeTimeSignature}
             />
           </div>
-          <div className={styles.channel}>
-            <span className={styles.instrument} />
-            {notesByInstrument[0].map((_, index) => (
-              <div key={index} className={styles.barNumber}>
-                {isFirstNoteInBar(index, notesCountInBar)
-                  ? index / notesCountInBar + 1
-                  : null}
-              </div>
-            ))}
-          </div>
-          {instruments.map((instrument, instrumentIndex) => (
-            <div key={instrumentIndex} className={styles.channel}>
-              <span className={styles.instrument}>{instrument}</span>
-              {notesByInstrument[instrumentIndex].map((note, noteIndex) => (
-                <SequencerNoteComponent
-                  key={noteIndex}
-                  note={note}
-                  isActive={isPlaying && noteIndex === activeNoteIndex}
-                  hasAccent={isFirstNoteInBar(noteIndex, notesCountInBar)}
-                  onChange={changeNote}
-                  instrumentIndex={instrumentIndex}
-                  noteIndex={noteIndex}
-                />
-              ))}
+          {notesCountInBar === null ? (
+            <div className={styles.error}>
+              Cannot build sequencer. Try select different rhythm or time
+              signature settings
             </div>
-          ))}
+          ) : (
+            <>
+              <div className={styles.channel}>
+                <span className={styles.instrument} />
+                {notesByInstrument[0].map((_, index) => (
+                  <div key={index} className={styles.barNumber}>
+                    {isFirstNoteInBar(index, notesCountInBar)
+                      ? index / notesCountInBar + 1
+                      : null}
+                  </div>
+                ))}
+              </div>
+              {instruments.map((instrument, instrumentIndex) => (
+                <div key={instrumentIndex} className={styles.channel}>
+                  <span className={styles.instrument}>{instrument}</span>
+                  {notesByInstrument[instrumentIndex].map((note, noteIndex) => (
+                    <SequencerNoteComponent
+                      key={noteIndex}
+                      note={note}
+                      isActive={isPlaying && noteIndex === activeNoteIndex}
+                      hasAccent={isFirstNoteInBar(noteIndex, notesCountInBar)}
+                      onChange={changeNote}
+                      instrumentIndex={instrumentIndex}
+                      noteIndex={noteIndex}
+                    />
+                  ))}
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </ThemeProvider>

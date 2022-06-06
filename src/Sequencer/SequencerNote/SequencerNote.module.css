@@ -7,6 +7,7 @@
   box-sizing: border-box;
   background-color: var(--bg-color);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .hasAccent {

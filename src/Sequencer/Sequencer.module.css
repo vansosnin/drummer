@@ -11,10 +11,13 @@
 
 .error {
   color: var(--error-color);
+  text-align: center;
+  margin-top: 20px;
 }
 
 .channel {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
