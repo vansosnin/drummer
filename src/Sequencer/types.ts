@@ -2,6 +2,8 @@ export enum SequencerChannelInstrument {
   Beep = "Beep",
   Boop = "Boop",
   HiHat = "HiHat",
+  Snare = "Snare",
+  Kick = "Kick",
 }
 
 export enum Rhythm {

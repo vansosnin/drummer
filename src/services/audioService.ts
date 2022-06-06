@@ -6,6 +6,8 @@ class AudioService {
   private readonly audioContext: AudioContext;
   private readonly gainNode: GainNode;
   private readonly hiHatAudioElement: HTMLAudioElement;
+  private readonly snareAudioElement: HTMLAudioElement;
+  private readonly kickAudioElement: HTMLAudioElement;
 
   constructor() {
     this.audioContext = new AudioContext();
@@ -18,6 +20,12 @@ class AudioService {
     this.hiHatAudioElement = new Audio(
       process.env.PUBLIC_URL + "/audio/KHats-Clsd-02.mp3"
     );
+    this.snareAudioElement = new Audio(
+      process.env.PUBLIC_URL + "/audio/Acoustic Snare-04.mp3"
+    );
+    this.kickAudioElement = new Audio(
+      process.env.PUBLIC_URL + "/audio/CYCdh_AcouKick-01.mp3"
+    );
   }
 
   public playSound(instrument: SequencerChannelInstrument): void {
@@ -25,6 +33,8 @@ class AudioService {
       [SequencerChannelInstrument.Beep]: this.playBeep,
       [SequencerChannelInstrument.Boop]: this.playBoop,
       [SequencerChannelInstrument.HiHat]: this.playHiHat,
+      [SequencerChannelInstrument.Snare]: this.playSnare,
+      [SequencerChannelInstrument.Kick]: this.playKick,
     };
 
     instruments[instrument]();
@@ -40,6 +50,14 @@ class AudioService {
 
   private playHiHat = (): Promise<void> => {
     return this.hiHatAudioElement.play();
+  };
+
+  private playSnare = (): Promise<void> => {
+    return this.snareAudioElement.play();
+  };
+
+  private playKick = (): Promise<void> => {
+    return this.kickAudioElement.play();
   };
 
   private playOscillatorSound(frequency: number): void {
