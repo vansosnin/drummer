@@ -13,7 +13,6 @@ import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 import React from "react";
 import { Rhythm, TimeSignature } from "../Sequencer/types";
 import styles from "./SequencerControls.module.css";
-import { MAX_TEMPO, MIN_TEMPO } from "../constants/metronomeSettings";
 import { TempoSlider } from "./TempoSlider";
 
 export enum PlayState {
@@ -58,15 +57,7 @@ export const SequencerControls = ({
   };
 
   const handleChangeTempo = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let value = parseInt(event.target.value, 10);
-    if (value < MIN_TEMPO) {
-      value = MIN_TEMPO;
-    }
-    if (value > MAX_TEMPO) {
-      value = MAX_TEMPO;
-    }
-
-    onChangeTempo(value);
+    onChangeTempo(parseInt(event.target.value, 10));
   };
 
   const handleChangeRhythm = (event: SelectChangeEvent) => {

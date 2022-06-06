@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { MAX_TEMPO, MIN_TEMPO } from "../constants/metronomeSettings";
 import { Slider } from "@mui/material";
@@ -10,6 +10,12 @@ interface ITempoSliderProps {
 
 export const TempoSlider = ({ tempo, onChangeTempo }: ITempoSliderProps) => {
   const [sliderTempo, setSliderTempo] = useState(tempo);
+
+  useEffect(() => {
+    if (tempo !== sliderTempo) {
+      setSliderTempo(tempo);
+    }
+  }, [tempo]);
 
   const handleChangeSliderTempo = (e: Event, value: number | number[]) => {
     if (Array.isArray(value)) {
