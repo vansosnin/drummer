@@ -1,6 +1,7 @@
 {
   "name": "drummer",
   "version": "0.1.0",
+  "homepage": "https://vansosnin.github.io/drummer",
   "private": true,
   "dependencies": {
     "@emotion/react": "11.9.0",
