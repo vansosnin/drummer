@@ -1,5 +1,5 @@
 import React from "react";
-import { Sequencer } from "./Sequencer/Sequencer";
+import { Sequencer } from "./components/Sequencer/Sequencer";
 
 function App() {
   return (

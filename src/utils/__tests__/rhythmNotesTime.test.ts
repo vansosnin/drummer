@@ -1,5 +1,5 @@
 import { TNotesTime, getRhythmNotesTime } from "../getRhythmNotesTime";
-import { Rhythm } from "../../Sequencer/types";
+import { Rhythm } from "../../types";
 
 it("rhythmNotesTime", () => {
   const cases: Record<Rhythm, TNotesTime> = {

@@ -1,4 +1,4 @@
-import { TimeSignature } from "../Sequencer/types";
+import { TimeSignature } from "../types";
 
 type TTimeSignatureInfo = [notesCountInBar: number, noteTime: number];
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Rhythm, TimeSignature } from "../Sequencer/types";
+import { Rhythm, TimeSignature } from "../types";
 import { getNotesCountInBar } from "../utils/getNotesCountInBar";
 import { getTimeSignatureInfo } from "../utils/getTimeSignatureInfo";
 

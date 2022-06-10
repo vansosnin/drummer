@@ -1,4 +1,4 @@
-import { SequencerChannelInstrument } from "../Sequencer/types";
+import { SequencerChannelInstrument } from "../types";
 
 const OSCILLATOR_NOTE_LENGTH = 0.1;
 

@@ -1,4 +1,4 @@
-import { SequencerChannelInstrument, SequencerNote } from "../Sequencer/types";
+import { SequencerChannelInstrument, SequencerNote } from "../types";
 import { audioService } from "../services/audioService";
 
 let previousActiveNoteIndex: number | null = null;

@@ -1,18 +1,18 @@
-import { SequencerChannelInstrument, SequencerNote } from "../Sequencer/types";
-import { useState, useCallback } from "react";
+import { SequencerNote } from "../types";
+import { useCallback, useState } from "react";
+import { instrumentsList } from "../utils/instruments";
 
 let prevTotalNotesCount = 0;
 
 export const useSequencerChannels = (totalNotesCount: number) => {
-  const instruments = Object.values(SequencerChannelInstrument);
   const defaultNotes = new Array(totalNotesCount).fill(SequencerNote.Off);
 
   const [notesByInstrument, setNotesByInstrument] = useState<SequencerNote[][]>(
-    instruments.map(() => defaultNotes)
+    instrumentsList.map(() => defaultNotes)
   );
 
   if (totalNotesCount !== prevTotalNotesCount) {
-    setNotesByInstrument(instruments.map(() => defaultNotes));
+    setNotesByInstrument(instrumentsList.map(() => defaultNotes));
     prevTotalNotesCount = totalNotesCount;
   }
 
@@ -32,5 +32,5 @@ export const useSequencerChannels = (totalNotesCount: number) => {
     [notesByInstrument]
   );
 
-  return { instruments, notesByInstrument, changeNote };
+  return { instruments: instrumentsList, notesByInstrument, changeNote, setNotesByInstrument };
 };

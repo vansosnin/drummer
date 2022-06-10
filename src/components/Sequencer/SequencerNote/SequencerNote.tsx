@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./SequencerNote.module.css";
-import { SequencerNote as SequencerNoteEnum } from "../types";
+import { SequencerNote as SequencerNoteEnum } from "../../../types";
 
 interface ISequencerNoteProps {
   note: SequencerNoteEnum;

@@ -11,7 +11,7 @@ import {
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 import React from "react";
-import { Rhythm, TimeSignature } from "../Sequencer/types";
+import { Rhythm, SequencerPreset, TimeSignature } from "../../types";
 import styles from "./SequencerControls.module.css";
 import { TempoSlider } from "./TempoSlider";
 
@@ -33,6 +33,8 @@ interface ISequencerControlsProps {
 
   timeSignature: TimeSignature;
   onChangeTimeSignature: (timeSignature: TimeSignature) => void;
+
+  onChangePreset: (preset: SequencerPreset) => void;
 }
 
 export const SequencerControls = ({
@@ -45,6 +47,7 @@ export const SequencerControls = ({
   onChangeRhythm,
   timeSignature,
   onChangeTimeSignature,
+  onChangePreset,
 }: ISequencerControlsProps) => {
   const handlePlay = () => {
     if (playState === PlayState.Play) {
@@ -66,6 +69,10 @@ export const SequencerControls = ({
 
   const handleChangeTimeSignature = (event: SelectChangeEvent) => {
     onChangeTimeSignature(event.target.value as TimeSignature);
+  };
+
+  const handleChangePreset = (event: SelectChangeEvent) => {
+    onChangePreset(event.target.value as SequencerPreset);
   };
 
   return (
@@ -117,6 +124,18 @@ export const SequencerControls = ({
               onChange={handleChangeTimeSignature}
             >
               {Object.values(TimeSignature).map((x) => (
+                <MenuItem key={x} value={x}>
+                  {x}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className={styles.selectInput}>
+          <FormControl fullWidth size="small">
+            <InputLabel>Preset</InputLabel>
+            <Select label="Preset" onChange={handleChangePreset}>
+              {Object.values(SequencerPreset).map((x) => (
                 <MenuItem key={x} value={x}>
                   {x}
                 </MenuItem>

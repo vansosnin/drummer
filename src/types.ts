@@ -26,6 +26,11 @@ export enum SequencerNote {
   On = "On",
 }
 
+export enum SequencerPreset {
+  Metronome = "Metronome",
+  Rock = "Rock",
+}
+
 export interface ISequencerChannel {
   instrument: SequencerChannelInstrument;
   barsCount: number;

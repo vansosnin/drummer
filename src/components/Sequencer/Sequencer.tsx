@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect } from "react";
 import { SequencerNote as SequencerNoteComponent } from "./SequencerNote/SequencerNote";
 import { ThemeProvider } from "@mui/material/styles";
-import { isFirstNoteInBar } from "../utils/isFirstNoteInBar";
+import { isFirstNoteInBar } from "../../utils/isFirstNoteInBar";
 import styles from "./Sequencer.module.css";
-import { useMetronome } from "../hooks/useMetronome";
+import { useMetronome } from "../../hooks/useMetronome";
 import {
   PlayState,
   SequencerControls,
 } from "../SequencerControls/SequencerControls";
-import { defaultTheme } from "../style/themes";
-import { useSequencerChannels } from "../hooks/useSequencerChannels";
-import { usePlayNotes } from "../hooks/usePlayNotes";
+import { defaultTheme } from "../../style/themes";
+import { useSequencerChannels } from "../../hooks/useSequencerChannels";
+import { usePlayNotes } from "../../hooks/usePlayNotes";
+import { SequencerPreset } from "../../types";
+import { sequencerPresets } from "./sequencerPresets";
 
 export const Sequencer = () => {
   const {
@@ -28,7 +30,7 @@ export const Sequencer = () => {
     changeTimeSignature,
   } = useMetronome();
 
-  const { instruments, notesByInstrument, changeNote } =
+  const { instruments, notesByInstrument, changeNote, setNotesByInstrument } =
     useSequencerChannels(totalNotesCount);
 
   usePlayNotes(instruments, notesByInstrument, activeNoteIndex);
@@ -60,12 +62,18 @@ export const Sequencer = () => {
     };
   }, [handleKeyDown]);
 
+  const handleChangePreset = (preset: SequencerPreset) => {
+    const [rhythm, timeSignature, notes] = sequencerPresets[preset];
+    changeRhythm(rhythm);
+    changeTimeSignature(timeSignature);
+    setNotesByInstrument(notes);
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className={styles.container}>
         <div className={styles.sequencer}>
           <div className={styles.channel}>
-            <span className={styles.instrument} />
             <SequencerControls
               playState={isPlaying ? PlayState.Play : PlayState.Stop}
               start={start}
@@ -76,6 +84,7 @@ export const Sequencer = () => {
               onChangeRhythm={changeRhythm}
               timeSignature={timeSignature}
               onChangeTimeSignature={changeTimeSignature}
+              onChangePreset={handleChangePreset}
             />
           </div>
           {notesCountInBar === null ? (

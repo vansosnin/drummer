@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { MAX_TEMPO, MIN_TEMPO } from "../constants/metronomeSettings";
+import { MAX_TEMPO, MIN_TEMPO } from "../../constants/metronomeSettings";
 import { Slider } from "@mui/material";
 
 interface ITempoSliderProps {

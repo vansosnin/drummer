@@ -1,4 +1,4 @@
-import { Rhythm } from "../Sequencer/types";
+import { Rhythm } from "../types";
 
 export type TNotesTime = [noteTime: number, isTriplet: boolean];
 

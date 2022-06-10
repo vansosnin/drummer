@@ -1,4 +1,4 @@
-import { Rhythm, TimeSignature } from "../Sequencer/types";
+import { Rhythm, TimeSignature } from "../types";
 import { getRhythmNotesTime } from "./getRhythmNotesTime";
 import { getTimeSignatureInfo } from "./getTimeSignatureInfo";
 

@@ -1,5 +1,5 @@
 import { getNotesCountInBar } from "../getNotesCountInBar";
-import { Rhythm, TimeSignature } from "../../Sequencer/types";
+import { Rhythm, TimeSignature } from "../../types";
 
 describe("notesInBar", () => {
   it("ThreeFour", () => {
