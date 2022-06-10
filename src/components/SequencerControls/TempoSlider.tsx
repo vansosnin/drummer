@@ -15,6 +15,7 @@ export const TempoSlider = ({ tempo, onChangeTempo }: ITempoSliderProps) => {
     if (tempo !== sliderTempo) {
       setSliderTempo(tempo);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tempo]);
 
   const handleChangeSliderTempo = (e: Event, value: number | number[]) => {
