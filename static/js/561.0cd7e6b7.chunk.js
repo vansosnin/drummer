@@ -1,0 +1,2 @@
+!function(){var t=1e3,a=null;onmessage=function(e){"start"===e.data?a=setInterval((function(){postMessage("tick")}),t):e.data.interval?(t=e.data.interval,a&&(clearInterval(a),a=setInterval((function(){postMessage("tick")}),t))):"stop"===e.data&&(clearInterval(a),a=null)}}();
+//# sourceMappingURL=561.0cd7e6b7.chunk.js.map
